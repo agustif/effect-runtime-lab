@@ -1,0 +1,17 @@
+{
+  "name": "candidate-name",
+  "track": "quickjs-core | txiki-platform | broad-runtime | specialized-labs",
+  "status": "planned",
+  "effectV4Fit": 0,
+  "hostSurfaceRichness": 0,
+  "deployability": 0,
+  "artifactSize": 0,
+  "startupTime": 0,
+  "memoryUsage": 0,
+  "dependencySurface": 0,
+  "easeOfEmbedding": 0,
+  "debuggability": 0,
+  "standardsCompliance": 0,
+  "maintenanceBurden": 0,
+  "notes": []
+}

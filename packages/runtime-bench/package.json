@@ -1,0 +1,6 @@
+{
+  "name": "@effect-experimental/runtime-bench",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module"
+}

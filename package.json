@@ -1,0 +1,9 @@
+{
+  "name": "effect-runtime-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "vendor:status": "git submodule status --recursive",
+    "vendor:update": "git submodule update --init --recursive"
+  }
+}
