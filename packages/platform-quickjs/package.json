@@ -3,7 +3,34 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "sideEffects": [],
   "exports": {
-    ".": "./src/index.ts"
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./internal/*": null,
+    "./*/index": null
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:host": "bun scripts/build-host.mjs",
+    "bundle:prod": "bun scripts/bundle-prod.mjs",
+    "test:prod": "bun scripts/test-production.mjs"
+  },
+  "peerDependencies": {
+    "effect": "workspace:^"
+  },
+  "devDependencies": {
+    "@effect-experimental/platform-quickjs-shared": "workspace:*",
+    "@effect/vitest": "workspace:^",
+    "effect": "workspace:^",
+    "vitest": "4.0.18",
+    "typescript": "^5.9.3",
+    "@types/node": "^25.2.0",
+    "esbuild": "^0.27.2",
+    "@effect-experimental/runtime-conformance": "workspace:*"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "name": "@effect-experimental/platform-quickjs-shared",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  }
+}

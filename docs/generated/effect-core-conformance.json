@@ -1,0 +1,279 @@
+{
+  "generatedAt": "2026-03-16T19:47:26.375Z",
+  "inventory": {
+    "effect": {
+      "total": 96,
+      "sample": [
+        "Array.test.ts",
+        "BigDecimal.test.ts",
+        "BigInt.test.ts",
+        "Boolean.test.ts",
+        "Brand.test.ts",
+        "Cache.test.ts",
+        "Cause.test.ts",
+        "Channel.test.ts",
+        "Chunk.test.ts",
+        "Combiner.test.ts",
+        "Config.test.ts",
+        "ConfigProvider.test.ts",
+        "Cron.test.ts",
+        "Data.test.ts",
+        "DateTime.test.ts",
+        "Deferred.test.ts",
+        "Duration.test.ts",
+        "Effect.test.ts",
+        "EffectEager.test.ts",
+        "EffectKeepAlive.test.ts"
+      ]
+    },
+    "platformNodeShared": {
+      "total": 4,
+      "tests": [
+        "NodeChildProcessSpawner.test.ts",
+        "NodeFileSystem.test.ts",
+        "NodeSink.test.ts",
+        "NodeStream.test.ts"
+      ]
+    },
+    "platformNode": {
+      "total": 10,
+      "tests": [
+        "HttpApi.test.ts",
+        "HttpStaticServer.test.ts",
+        "HttpStaticServerConditional.test.ts",
+        "NodeHttpClient.test.ts",
+        "NodeHttpPlatform.test.ts",
+        "NodeHttpServer.test.ts",
+        "NodeRedis.test.ts",
+        "NodeSocket.test.ts",
+        "OpenApi.test.ts",
+        "RpcServer.test.ts"
+      ]
+    },
+    "adopted": [
+      {
+        "source": "EffectKeepAlive.test.ts",
+        "reason": "ported into shared KeepAliveContract plus runtime-main tests"
+      },
+      {
+        "source": "NodeFileSystem.test.ts",
+        "reason": "temp, copy, truncate, cursor, append, and basic file-handle semantics are ported into shared filesystem contracts"
+      },
+      {
+        "source": "HttpClient.test.ts",
+        "reason": "stream and timeout or abort-style semantics are ported into shared HTTP contracts"
+      },
+      {
+        "source": "NodeHttpClient.test.ts",
+        "reason": "redirect-follow semantics are ported into a shared local redirect contract"
+      },
+      {
+        "source": "Request.test.ts",
+        "reason": "interruption and request-service propagation semantics are covered by the curated exploratory runner"
+      },
+      {
+        "source": "FiberSet.test.ts",
+        "reason": "interrupt, awaitEmpty, and runtime semantics are covered by the curated exploratory runner"
+      },
+      {
+        "source": "Queue.test.ts",
+        "reason": "interrupt-allows-draining and offerAll interruption semantics are covered by the curated exploratory runner"
+      },
+      {
+        "source": "Stream.test.ts",
+        "reason": "callback cleanup, backpressure, end, and error semantics are covered by the curated exploratory runner"
+      }
+    ],
+    "next": [
+      {
+        "source": "NodeHttpClient.test.ts",
+        "reason": "still the main source for richer local HTTP parity such as HEAD or schema JSON and broader streaming semantics"
+      }
+    ],
+    "exploratory": [
+      {
+        "source": "Scope.test.ts",
+        "reason": "additional scope behaviors beyond parallel finalization still need curated imports"
+      },
+      {
+        "source": "Request.test.ts",
+        "reason": "batching and grouped-resolver semantics still need curated imports"
+      },
+      {
+        "source": "FiberSet.test.ts",
+        "reason": "join, size, and propagateInterruption semantics still need curated imports"
+      },
+      {
+        "source": "Queue.test.ts",
+        "reason": "shutdown and completed-take semantics still need curated imports"
+      },
+      {
+        "source": "Stream.test.ts",
+        "reason": "larger interruption, defect, and callback subsets still need curated imports"
+      }
+    ]
+  },
+  "curated": {
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "taxonomy": {
+      "runtime-bug": 0,
+      "missing-platform-api": 0,
+      "harness-mismatch": 0,
+      "unknown": 0
+    },
+    "results": [
+      {
+        "name": "scope.parallelFinalization",
+        "status": "passed",
+        "durationMs": 5.448
+      },
+      {
+        "name": "scope.sequentialFinalizersRunInReverseOrder",
+        "status": "passed",
+        "durationMs": 0.218
+      },
+      {
+        "name": "request.batchingPreservesRequests",
+        "status": "passed",
+        "durationMs": 21.46
+      },
+      {
+        "name": "request.groupedResolverKeepsKeysSeparated",
+        "status": "passed",
+        "durationMs": 0.862
+      },
+      {
+        "name": "request.preservesIdenticalRequests",
+        "status": "passed",
+        "durationMs": 1.537
+      },
+      {
+        "name": "request.requestsDontBreakInterruption",
+        "status": "passed",
+        "durationMs": 0.647
+      },
+      {
+        "name": "request.requestDelayServices",
+        "status": "passed",
+        "durationMs": 0.308
+      },
+      {
+        "name": "fiberset.interruptsFibers",
+        "status": "passed",
+        "durationMs": 3.195
+      },
+      {
+        "name": "fiberset.awaitEmpty",
+        "status": "passed",
+        "durationMs": 1.094
+      },
+      {
+        "name": "fiberset.join",
+        "status": "passed",
+        "durationMs": 0.198
+      },
+      {
+        "name": "fiberset.joinCompletesOnFailureWithRunningFibers",
+        "status": "passed",
+        "durationMs": 0.847
+      },
+      {
+        "name": "fiberset.runtime",
+        "status": "passed",
+        "durationMs": 0.346
+      },
+      {
+        "name": "fiberset.size",
+        "status": "passed",
+        "durationMs": 0.501
+      },
+      {
+        "name": "fiberset.sizeDropsAfterCompletion",
+        "status": "passed",
+        "durationMs": 0.233
+      },
+      {
+        "name": "fiberset.propagateInterruptionFalse",
+        "status": "passed",
+        "durationMs": 0.369
+      },
+      {
+        "name": "fiberset.propagateInterruptionTrue",
+        "status": "passed",
+        "durationMs": 0.295
+      },
+      {
+        "name": "queue.doneCompletesTakes",
+        "status": "passed",
+        "durationMs": 0.949
+      },
+      {
+        "name": "queue.endEmitsAllItems",
+        "status": "passed",
+        "durationMs": 1.237
+      },
+      {
+        "name": "queue.endWithTake",
+        "status": "passed",
+        "durationMs": 0.314
+      },
+      {
+        "name": "queue.interruptAllowsDraining",
+        "status": "passed",
+        "durationMs": 0.164
+      },
+      {
+        "name": "queue.offerAllInterrupted",
+        "status": "passed",
+        "durationMs": 0.243
+      },
+      {
+        "name": "queue.pollReturnsOption",
+        "status": "passed",
+        "durationMs": 0.25
+      },
+      {
+        "name": "queue.shutdownCompletesAwait",
+        "status": "passed",
+        "durationMs": 0.514
+      },
+      {
+        "name": "stream.callbackCleanup",
+        "status": "passed",
+        "durationMs": 2.134
+      },
+      {
+        "name": "stream.callbackBackpressure",
+        "status": "passed",
+        "durationMs": 2.729
+      },
+      {
+        "name": "stream.callbackSignalsEnd",
+        "status": "passed",
+        "durationMs": 0.213
+      },
+      {
+        "name": "stream.callbackHandlesErrors",
+        "status": "passed",
+        "durationMs": 0.164
+      },
+      {
+        "name": "stream.callbackHandlesDefects",
+        "status": "passed",
+        "durationMs": 0.183
+      },
+      {
+        "name": "stream.aggregateWithinInterruptPropagation",
+        "status": "passed",
+        "durationMs": 2.48
+      },
+      {
+        "name": "stream.aggregateWithinDefectPropagation",
+        "status": "passed",
+        "durationMs": 0.213
+      }
+    ]
+  }
+}

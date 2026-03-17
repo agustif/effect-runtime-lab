@@ -1,0 +1,58 @@
+{
+  "name": "@effect-experimental/runtime-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:ui": "playwright test --ui",
+    
+    "test:all": "pnpm test && pnpm test:e2e",
+    
+    "e2e:install": "playwright install chromium firefox webkit",
+    "e2e:install-deps": "playwright install-deps chromium",
+    
+    "validate": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    
+    "clean": "rm -rf dist node_modules .next coverage playwright-report test-results"
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitejs/plugin-rsc": "^0.5.19",
+    "@vitest/coverage-v8": "^4.1.0",
+    "@vitest/ui": "^4.1.0",
+    "axe-core": "^4.10.0",
+    "eslint": "^9.20.0",
+    "eslint-config-next": "16.1.6",
+    "jsdom": "^26.0.0",
+    "playwright": "^1.58.2",
+    "typescript": "^5.7.3",
+    "vinext": "0.0.30",
+    "vitest": "^4.0.18"
+  }
+}

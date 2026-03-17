@@ -1,0 +1,32 @@
+{
+  "name": "@effect-experimental/platform-txiki",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": [],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./internal/*": null,
+    "./*/index": null
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:prod": "bun scripts/test-production.mjs"
+  },
+  "peerDependencies": {
+    "effect": "workspace:^"
+  },
+  "devDependencies": {
+    "@effect-experimental/platform-quickjs-shared": "workspace:*",
+    "effect": "workspace:^",
+    "vitest": "4.0.18",
+    "typescript": "^5.9.3",
+    "@types/node": "^25.2.0",
+    "@effect-experimental/runtime-conformance": "workspace:*"
+  }
+}

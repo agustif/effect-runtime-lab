@@ -1,6 +1,6 @@
 {
   "name": "candidate-name",
-  "track": "quickjs-core | txiki-platform | broad-runtime | specialized-labs",
+  "track": "quickjs-core | platform-txiki | broad-runtime | specialized-labs",
   "status": "planned",
   "effectV4Fit": 0,
   "hostSurfaceRichness": 0,

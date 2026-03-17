@@ -1,11 +1,9 @@
 # Archive
 
-The previous mixed repository work was intentionally preserved before this reset.
+This file notes earlier work preserved before the reset.
 
 Archived references:
-- `effect-quickjs` branch `platform-quickjs-v4` at commit `829c118`
-- `effect-quickjs-prod-v4` branch `platform-quickjs-prod-v4` at commit `5923953`
+- `/Users/af/effect-quickjs` branch `platform-quickjs-v4` at commit `829c118`
+- `/Users/af/effect-quickjs-prod-v4` branch `platform-quickjs-prod-v4` at commit `5923953`
 
-Those snapshots are retained for archaeology only.
-
-This repository is the clean restart.
+These are here for archaeology and native host reference only. Please treat this repo as the current source of truth for package boundaries and runtime claims.

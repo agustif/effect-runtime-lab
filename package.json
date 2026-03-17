@@ -3,7 +3,19 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "pnpm --filter @effect-experimental/platform-quickjs build && pnpm --filter @effect-experimental/platform-txiki build && pnpm --filter @effect-experimental/platform-microquickjs build",
+    "check": "pnpm --filter @effect-experimental/platform-quickjs check && pnpm --filter @effect-experimental/platform-txiki check && pnpm --filter @effect-experimental/platform-microquickjs check",
+    "test": "pnpm --filter @effect-experimental/platform-quickjs test && pnpm --filter @effect-experimental/platform-txiki test && pnpm --filter @effect-experimental/platform-microquickjs test && pnpm --filter @effect-experimental/effect-core-conformance test",
+    "test:watch": "pnpm --filter @effect-experimental/platform-quickjs test:watch",
     "vendor:status": "git submodule status --recursive",
-    "vendor:update": "git submodule update --init --recursive"
+    "vendor:update": "git submodule update --init --recursive",
+    "build:host": "pnpm --filter @effect-experimental/platform-quickjs build:host",
+    "test:prod": "pnpm --filter @effect-experimental/platform-quickjs test:prod && pnpm --filter @effect-experimental/platform-txiki test:prod",
+    "build:all": "pnpm build && pnpm --filter @effect-experimental/runtime-conformance build && pnpm --filter @effect-experimental/runtime-bench build && pnpm --filter @effect-experimental/effect-core-conformance build",
+    "bench:artifacts": "pnpm --filter @effect-experimental/runtime-bench artifacts",
+    "bench:startup": "pnpm --filter @effect-experimental/runtime-bench startup",
+    "conformance:inventory": "pnpm --filter @effect-experimental/effect-core-conformance inventory",
+    "conformance:curated": "pnpm --filter @effect-experimental/effect-core-conformance curated",
+    "data:refresh": "pnpm --filter @effect-experimental/runtime-bench snapshot && pnpm --filter @effect-experimental/effect-core-conformance snapshot"
   }
 }

@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../vendor/effect-smol/tsconfig.base.json",
+  "include": ["src"],
+  "references": [
+    { "path": "../../vendor/effect-smol/packages/effect" }
+  ],
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}

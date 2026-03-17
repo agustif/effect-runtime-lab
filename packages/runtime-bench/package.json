@@ -2,5 +2,24 @@
   "name": "@effect-experimental/runtime-bench",
   "private": true,
   "version": "0.0.0",
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json",
+    "artifacts": "tsx src/artifacts.ts",
+    "startup": "tsx src/startup.ts",
+    "snapshot": "tsx src/snapshot.ts"
+  },
+  "dependencies": {
+    "effect": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "@types/node": "^25.2.0"
+  }
 }

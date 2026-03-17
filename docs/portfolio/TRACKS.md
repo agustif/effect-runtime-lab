@@ -1,35 +1,33 @@
 # Runtime Tracks
 
 ## Track A: quickjs-core
-Purpose: smallest native Effect runtime with explicit guarantees.
+Aim: a small native Effect runtime with explicit guarantees.
 
-Focus:
-- artifact size
-- startup time
-- dependency surface
-- deterministic host contract
+Current focus:
+- native host boundary
+- package-level parity with upstream runtime shape
+- deterministic host-backed validation
+- artifact size and dependency surface
 
-## Track B: txiki-platform
-Purpose: richer small-runtime platform with much less custom host code.
+## Track B: platform-txiki
+Aim: a small-but-richer adapter with less custom host code.
 
-Focus:
-- leverage
-- broader host capabilities
-- acceptable deployability
-- lower maintenance burden than a fully custom host
+Current focus:
+- txiki-native service implementations
+- a useful runtime surface with honest package boundaries
+- leaning on standard web APIs instead of rebuilding them
 
-## Track C: broad-runtime
-Purpose: compare against pragmatic runtimes such as Deno or Bun.
+## Track C: platform-microquickjs
+Aim: a lightweight WASM sandbox track for guest-code execution and host-object exposure.
 
-Focus:
-- shipping speed
-- executable story
-- DX and built-in platform surface
+Current focus:
+- honest runtime-wrapper boundaries
+- optional modern-JS compilation into the MicroQuickJS guest dialect
+- determining whether this should remain a wrapper package or grow Effect platform services
 
 ## Track D: specialized-labs
-Purpose: evaluate specialized runtime forms such as workerd, LLRT, or Javy.
+Aim: future exploration of workerd, LLRT, Javy, or other specialized runtime forms.
 
-Focus:
-- edge/capability experiments
-- serverless cold-start experiments
-- hermetic component experiments
+Current status:
+- planned only
+- not part of the current implementation slice

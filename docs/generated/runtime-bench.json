@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-03-16T19:47:25.511Z",
+  "platform": {
+    "os": "darwin",
+    "arch": "arm64",
+    "node": "v25.2.1"
+  },
+  "artifacts": [
+    {
+      "path": "/Users/af/effect-runtime-lab/.tmp-runtime-evals/txikijs/build/tjs",
+      "size": 6072064,
+      "deps": [
+        "/usr/lib/libffi.dylib (compatibility version 1.0.0, current version 40.0.0)",
+        "/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)",
+        "/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2000.67.0)"
+      ],
+      "depsSource": "otool",
+      "platform": {
+        "os": "darwin",
+        "arch": "arm64",
+        "node": "v25.2.1"
+      }
+    },
+    {
+      "path": "/Users/af/effect-runtime-lab/.tmp-runtime-evals/txikijs/hello-compiled",
+      "size": 6072175,
+      "deps": [
+        "/usr/lib/libffi.dylib (compatibility version 1.0.0, current version 40.0.0)",
+        "/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)",
+        "/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2000.67.0)"
+      ],
+      "depsSource": "otool",
+      "platform": {
+        "os": "darwin",
+        "arch": "arm64",
+        "node": "v25.2.1"
+      }
+    },
+    {
+      "path": "/Users/af/effect-runtime-lab/packages/platform-quickjs/bin/effect-quickjs-host",
+      "size": 1041280,
+      "deps": [
+        "/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)",
+        "/usr/lib/libcurl.4.dylib (compatibility version 7.0.0, current version 9.0.0)"
+      ],
+      "depsSource": "otool",
+      "platform": {
+        "os": "darwin",
+        "arch": "arm64",
+        "node": "v25.2.1"
+      }
+    }
+  ],
+  "startup": [
+    {
+      "name": "quickjs-host",
+      "wallTimeMs": 15.381208,
+      "maxResidentSetKb": 7040,
+      "rssSource": "time -l",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "        0.01 real         0.00 user         0.00 sys\n             7208960  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 637  page reclaims\n                   2  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  17  involuntary context switches\n            36241253  instructions retired\n            18260968  cycles elapsed\n             2244992  peak memory footprint\n"
+    },
+    {
+      "name": "txiki-compiled",
+      "wallTimeMs": 22.239458,
+      "maxResidentSetKb": 5392,
+      "rssSource": "time -l",
+      "exitCode": 0,
+      "stdout": "hello txiki\n",
+      "stderr": "        0.01 real         0.00 user         0.00 sys\n             5521408  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 517  page reclaims\n                  12  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  53  involuntary context switches\n            55812370  instructions retired\n            27045162  cycles elapsed\n             3277208  peak memory footprint\n"
+    },
+    {
+      "name": "txiki-runtime",
+      "wallTimeMs": 26.88025,
+      "maxResidentSetKb": 5568,
+      "rssSource": "time -l",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "        0.01 real         0.00 user         0.00 sys\n             5701632  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 528  page reclaims\n                  12  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  47  involuntary context switches\n            56598622  instructions retired\n            27504810  cycles elapsed\n             3309976  peak memory footprint\n"
+    },
+    {
+      "name": "bun",
+      "wallTimeMs": 34.342125,
+      "maxResidentSetKb": 27344,
+      "rssSource": "time -l",
+      "exitCode": 0,
+      "stdout": "ok\n",
+      "stderr": "        0.03 real         0.01 user         0.00 sys\n            28000256  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1811  page reclaims\n                 100  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 104  involuntary context switches\n           153674842  instructions retired\n            69541724  cycles elapsed\n            11043488  peak memory footprint\n"
+    },
+    {
+      "name": "node",
+      "wallTimeMs": 88.167375,
+      "maxResidentSetKb": 45248,
+      "rssSource": "time -l",
+      "exitCode": 0,
+      "stdout": "ok\n",
+      "stderr": "        0.08 real         0.06 user         0.01 sys\n            46333952  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                3093  page reclaims\n                  69  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 215  involuntary context switches\n           561360060  instructions retired\n           216561020  cycles elapsed\n            15140616  peak memory footprint\n"
+    }
+  ],
+  "warmStart": [
+    {
+      "name": "bun",
+      "iterations": 5,
+      "samplesMs": [
+        31.623875,
+        27.10425,
+        34.234708,
+        32.482333,
+        30.419458
+      ],
+      "rssSamplesKb": [
+        27216,
+        27344,
+        27392,
+        27312,
+        27376
+      ],
+      "rssSource": "time -l"
+    },
+    {
+      "name": "node",
+      "iterations": 5,
+      "samplesMs": [
+        88.918792,
+        80.525583,
+        80.931583,
+        87.343959,
+        71.317542
+      ],
+      "rssSamplesKb": [
+        44896,
+        45008,
+        45008,
+        44912,
+        45008
+      ],
+      "rssSource": "time -l"
+    },
+    {
+      "name": "quickjs-host",
+      "iterations": 5,
+      "samplesMs": [
+        11.780666,
+        13.011083,
+        10.712916,
+        13.093208,
+        14.498916
+      ],
+      "rssSamplesKb": [
+        6944,
+        6944,
+        7008,
+        6976,
+        7008
+      ],
+      "rssSource": "time -l"
+    },
+    {
+      "name": "txiki-compiled",
+      "iterations": 5,
+      "samplesMs": [
+        21.122375,
+        15.148666,
+        22.198709,
+        30.020125,
+        20.131292
+      ],
+      "rssSamplesKb": [
+        5392,
+        5424,
+        5424,
+        5392,
+        5408
+      ],
+      "rssSource": "time -l"
+    },
+    {
+      "name": "txiki-runtime",
+      "iterations": 5,
+      "samplesMs": [
+        16.455083,
+        16.01,
+        17.903625,
+        13.785625,
+        15.919041
+      ],
+      "rssSamplesKb": [
+        5584,
+        5568,
+        5584,
+        5584,
+        5584
+      ],
+      "rssSource": "time -l"
+    }
+  ]
+}

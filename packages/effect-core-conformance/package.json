@@ -1,0 +1,25 @@
+{
+  "name": "@effect-experimental/effect-core-conformance",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json",
+    "inventory": "tsx src/inventory.ts",
+    "curated": "tsx src/curated.ts",
+    "snapshot": "tsx src/snapshot.ts",
+    "test": "pnpm exec vitest run && tsx src/curated.ts"
+  },
+  "devDependencies": {
+    "effect": "workspace:^",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "@types/node": "^25.2.0",
+    "vitest": "4.0.18"
+  }
+}

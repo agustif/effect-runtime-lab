@@ -1,0 +1,47 @@
+version: 2
+
+updates:
+  # npm/pnpm packages
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    reviewers:
+      - af
+    assignees:
+      - af
+    commit-message:
+      prefix: 'deps'
+      include: scope
+    groups:
+      effect:
+        patterns:
+          - 'effect'
+          - '@effect/*'
+      dev-dependencies:
+        dependency-type: development
+        patterns:
+          - 'vitest'
+          - '@vitest/*'
+          - 'playwright'
+          - '@playwright/*'
+          - 'eslint'
+          - '@eslint/*'
+          - 'typescript'
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    reviewers:
+      - af
+    assignees:
+      - af
+    commit-message:
+      prefix: 'ci'
+      include: scope

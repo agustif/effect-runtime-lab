@@ -2,5 +2,21 @@
   "name": "@effect-experimental/runtime-conformance",
   "private": true,
   "version": "0.0.0",
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json"
+  },
+  "peerDependencies": {
+    "effect": "workspace:^"
+  },
+  "devDependencies": {
+    "effect": "workspace:^",
+    "typescript": "^5.9.3",
+    "@types/node": "^25.2.0"
+  }
 }

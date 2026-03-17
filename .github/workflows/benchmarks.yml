@@ -1,0 +1,74 @@
+name: Weekly Benchmarks
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  benchmarks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          run_install: false
+      
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build packages
+        run: pnpm build:all
+      
+      - name: Run startup benchmarks
+        run: pnpm bench:startup
+      
+      - name: Run conformance inventory
+        run: pnpm conformance:inventory
+      
+      - name: Generate snapshots
+        run: |
+          pnpm --filter @effect-experimental/runtime-bench snapshot
+          pnpm --filter @effect-experimental/effect-core-conformance snapshot
+      
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-benchmarks-${{ github.run_id }}
+          path: docs/generated/
+          retention-days: 90
+      
+      - name: Create summary
+        run: |
+          echo "## Weekly Benchmark Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Generated: $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Files" >> $GITHUB_STEP_SUMMARY
+          ls -la docs/generated/ >> $GITHUB_STEP_SUMMARY
