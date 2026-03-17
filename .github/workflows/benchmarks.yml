@@ -58,7 +58,7 @@ jobs:
           pnpm --filter @effect-experimental/effect-core-conformance snapshot
       
       - name: Upload results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: weekly-benchmarks-${{ github.run_id }}
           path: docs/generated/
