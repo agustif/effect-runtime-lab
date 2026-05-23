@@ -21,6 +21,20 @@ const main = Effect.gen(function* () {
     () => new Promise<string>((resolve) => setTimeout(() => resolve("ok"), 5)),
   );
   if (timer !== "ok") throw new Error("timer failed");
+  const intervalCount = yield* Effect.promise(
+    () =>
+      new Promise<number>((resolve) => {
+        let count = 0;
+        const handle = setInterval(() => {
+          count += 1;
+          if (count >= 2) {
+            clearInterval(handle);
+            resolve(count);
+          }
+        }, 5);
+      }),
+  );
+  if (intervalCount !== 2) throw new Error("interval failed");
   const bytes = new TextEncoder().encode("hello");
   if (new TextDecoder().decode(bytes) !== "hello") {
     throw new Error("text encoding failed");

@@ -160,8 +160,14 @@ static JSValue load_module_namespace(JSContext *ctx, const char *module_name, co
   JS_FreeValue(ctx, evaluated);
 
   JSModuleDef *module = JS_VALUE_GET_PTR(object);
-  JSValue namespace = JS_GetModuleNamespace(ctx, module);
+  JSValue wrapper_namespace = JS_GetModuleNamespace(ctx, module);
   JS_FreeValue(ctx, object);
+  if (JS_IsException(wrapper_namespace)) {
+    return wrapper_namespace;
+  }
+
+  JSValue namespace = JS_GetPropertyStr(ctx, wrapper_namespace, "default");
+  JS_FreeValue(ctx, wrapper_namespace);
   return namespace;
 }
 
