@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "no-unused-vars": "warn",
+    "require-yield": "off",
+    "no-unused-expressions": "off"
+  },
+  "exclude": [
+    "vendor/**",
+    "node_modules/**",
+    "dist/**",
+    "**/dist/**",
+    "apps/site/vitest-report/**",
+    "**/coverage/**"
+  ]
+}

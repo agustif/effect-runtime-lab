@@ -1,0 +1,22 @@
+{
+  "$schema": "https://dprint.dev/schemas/config.json",
+  "lineWidth": 100,
+  "indentWidth": 2,
+  "useTabs": false,
+  "newLineKind": "lf",
+  "incremental": true,
+  "excludes": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/.git/**",
+    "**/vendor/**"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/oxc-0.5.0.wasm"
+  ],
+  "oxc": {
+    "indentWidth": 2,
+    "lineWidth": 100
+  }
+}

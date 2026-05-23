@@ -1,10 +1,11 @@
-import { execFileSync, spawnSync, type SpawnSyncOptions } from "node:child_process"
-import { existsSync, mkdtempSync, rmSync, statSync, writeFileSync } from "node:fs"
-import { join } from "node:path"
-import { tmpdir } from "node:os"
-import * as Effect from "effect/Effect"
+import { execFileSync, spawnSync, type SpawnSyncOptions } from "node:child_process";
+import { existsSync, mkdtempSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import * as Effect from "effect/Effect";
 
-export const fileSizeBytes = (path: string): number | null => existsSync(path) ? statSync(path).size : null
+export const fileSizeBytes = (path: string): number | null =>
+  existsSync(path) ? statSync(path).size : null;
 
 export const macDependencies = (path: string): Array<string> => {
   try {
@@ -12,117 +13,117 @@ export const macDependencies = (path: string): Array<string> => {
       .split("\n")
       .slice(1)
       .map((line) => line.trim())
-      .filter(Boolean)
+      .filter(Boolean);
   } catch {
-    return []
+    return [];
   }
-}
+};
 
 export const linuxDependencies = (path: string): Array<string> => {
   try {
     return execFileSync("ldd", [path], { encoding: "utf8" })
       .split("\n")
       .map((line) => line.trim())
-      .filter(Boolean)
+      .filter(Boolean);
   } catch {
-    return []
+    return [];
   }
-}
+};
 
 export const windowsDependencies = (path: string): Array<string> => {
   try {
     return execFileSync("dumpbin", ["/DEPENDENTS", path], { encoding: "utf8" })
       .split("\n")
       .map((line) => line.trim())
-      .filter(Boolean)
+      .filter(Boolean);
   } catch {
-    return []
+    return [];
   }
-}
+};
 
 export const platformDependencies = (path: string): { deps: Array<string>; source: string } => {
   if (process.platform === "darwin") {
-    return { deps: macDependencies(path), source: "otool" }
+    return { deps: macDependencies(path), source: "otool" };
   }
   if (process.platform === "linux") {
-    return { deps: linuxDependencies(path), source: "ldd" }
+    return { deps: linuxDependencies(path), source: "ldd" };
   }
   if (process.platform === "win32") {
-    return { deps: windowsDependencies(path), source: "dumpbin" }
+    return { deps: windowsDependencies(path), source: "dumpbin" };
   }
-  return { deps: [], source: "unknown" }
-}
+  return { deps: [], source: "unknown" };
+};
 
 export interface CommandMeasurement {
-  readonly wallTimeMs: number
-  readonly maxResidentSetKb: number | null
-  readonly rssSource: string
-  readonly exitCode: number
-  readonly stdout: string
-  readonly stderr: string
+  readonly wallTimeMs: number;
+  readonly maxResidentSetKb: number | null;
+  readonly rssSource: string;
+  readonly exitCode: number;
+  readonly stdout: string;
+  readonly stderr: string;
 }
 
 const parseMacMaxResidentSetKb = (stderr: string): number | null => {
-  const match = stderr.match(/^\s*(\d+)\s+maximum resident set size/m)
-  return match ? Math.round(Number(match[1]) / 1024) : null
-}
+  const match = stderr.match(/^\s*(\d+)\s+maximum resident set size/m);
+  return match ? Math.round(Number(match[1]) / 1024) : null;
+};
 
 const parseLinuxMaxResidentSetKb = (stderr: string): number | null => {
-  const match = stderr.match(/Maximum resident set size \(kbytes\):\s*(\d+)/m)
-  return match ? Number(match[1]) : null
-}
+  const match = stderr.match(/Maximum resident set size \(kbytes\):\s*(\d+)/m);
+  return match ? Number(match[1]) : null;
+};
 
 export const measureCommandEffect = (
   command: string,
   args: ReadonlyArray<string>,
-  options?: SpawnSyncOptions
+  options?: SpawnSyncOptions,
 ) =>
   Effect.sync((): CommandMeasurement => {
-    const startedAt = process.hrtime.bigint()
+    const startedAt = process.hrtime.bigint();
 
     if (process.platform === "darwin") {
       const result = spawnSync("/usr/bin/time", ["-l", command, ...args], {
         encoding: "utf8",
-        ...options
-      })
-      const stdout = String(result.stdout ?? "")
-      const stderr = String(result.stderr ?? "")
-      const wallTimeMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000
+        ...options,
+      });
+      const stdout = String(result.stdout ?? "");
+      const stderr = String(result.stderr ?? "");
+      const wallTimeMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
       return {
         wallTimeMs,
         maxResidentSetKb: parseMacMaxResidentSetKb(stderr),
         rssSource: "time -l",
         exitCode: result.status ?? 1,
         stdout,
-        stderr
-      }
+        stderr,
+      };
     }
 
     if (process.platform === "linux") {
       const result = spawnSync("/usr/bin/time", ["-v", command, ...args], {
         encoding: "utf8",
-        ...options
-      })
+        ...options,
+      });
       if (!result.error) {
-        const stdout = String(result.stdout ?? "")
-        const stderr = String(result.stderr ?? "")
+        const stdout = String(result.stdout ?? "");
+        const stderr = String(result.stderr ?? "");
         return {
           wallTimeMs: Number(process.hrtime.bigint() - startedAt) / 1_000_000,
           maxResidentSetKb: parseLinuxMaxResidentSetKb(stderr),
           rssSource: "time -v",
           exitCode: result.status ?? 1,
           stdout,
-          stderr
-        }
+          stderr,
+        };
       }
     }
 
     const result = spawnSync(command, [...args], {
       encoding: "utf8",
-      ...options
-    })
-    const stdout = String(result.stdout ?? "")
-    const stderr = String(result.stderr ?? "")
+      ...options,
+    });
+    const stdout = String(result.stdout ?? "");
+    const stderr = String(result.stderr ?? "");
 
     return {
       wallTimeMs: Number(process.hrtime.bigint() - startedAt) / 1_000_000,
@@ -130,24 +131,24 @@ export const measureCommandEffect = (
       rssSource: "unknown",
       exitCode: result.status ?? 1,
       stdout,
-      stderr
-    }
-  })
+      stderr,
+    };
+  });
 
 export const measureCommand = (
   command: string,
   args: ReadonlyArray<string>,
-  options?: SpawnSyncOptions
-): CommandMeasurement => Effect.runSync(measureCommandEffect(command, args, options))
+  options?: SpawnSyncOptions,
+): CommandMeasurement => Effect.runSync(measureCommandEffect(command, args, options));
 
 export const withTemporaryJavaScriptFile = <A>(source: string, f: (path: string) => A): A => {
-  const directory = mkdtempSync(join(tmpdir(), "effect-runtime-bench-"))
-  const file = join(directory, "entry.js")
-  writeFileSync(file, source)
+  const directory = mkdtempSync(join(tmpdir(), "effect-runtime-bench-"));
+  const file = join(directory, "entry.js");
+  writeFileSync(file, source);
 
   try {
-    return f(file)
+    return f(file);
   } finally {
-    rmSync(directory, { force: true, recursive: true })
+    rmSync(directory, { force: true, recursive: true });
   }
-}
+};

@@ -1,0 +1,5 @@
+{
+  "generatedTypesPath": "./source/generated/worker-configuration.d.ts",
+  "workersTypesVersion": "4.20260317.1",
+  "wranglerConfigPath": "./wrangler.jsonc"
+}

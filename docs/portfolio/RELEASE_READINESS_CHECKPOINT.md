@@ -1,6 +1,6 @@
 # Release readiness checkpoint
 
-This is the current, best-effort release-readiness snapshot for runtime-lab. It is intentionally conservative.
+This is the current, best-effort release-readiness snapshot for runtime-lab. It is intentionally conservative and distinguishes host runtimes from Workers platform adapters.
 
 ## QuickJS
 
@@ -42,6 +42,18 @@ This is the current, best-effort release-readiness snapshot for runtime-lab. It 
 ## Shared blockers
 - Linux/Windows benchmarks and host-backed proofs are still missing
 - nightly full upstream suite + stress/property gates are not yet wired
+
+## Cloudflare Workers platform-adapter track
+
+### Verified now
+- `platform-workerd` build, typecheck, checked-in `wrangler types` fixture validation, and runtime-backed Worker-pool tests pass
+- `cloudflare-d1`, `cloudflare-kv`, and `cloudflare-sqlite-do` each have runtime-backed smoke tests against real Workers bindings
+- Workers invocation context, loopback exports, RPC leases, Durable Objects, Workflows, and tmp-fs claims are validated against the Workers runtime instead of local mock contracts
+
+### Still blocking broader claims
+- this is not yet a full host-runtime parity target and should not be described that way
+- the retained Cloudflare bridges are intentionally narrow and do not imply broad binding coverage
+- no broader support matrix exists yet beyond the currently tested Workers surfaces
 
 ## Current release criteria
 

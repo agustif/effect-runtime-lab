@@ -1,12 +1,12 @@
-import { loadEffectCoreConformance } from "../../lib/data.js"
-import { formatNumber } from "../../lib/format.js"
+import { loadEffectCoreConformance } from "../../lib/data.js";
+import { formatNumber } from "../../lib/format.js";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export default function ConformancePage() {
-  const conformance = loadEffectCoreConformance()
-  const curated = conformance?.curated
-  const inventory = conformance?.inventory
+  const conformance = loadEffectCoreConformance();
+  const curated = conformance?.curated;
+  const inventory = conformance?.inventory;
 
   return (
     <div className="section">
@@ -95,5 +95,5 @@ export default function ConformancePage() {
         </table>
       </div>
     </div>
-  )
+  );
 }

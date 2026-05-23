@@ -1,7 +1,3 @@
-import { loadRoadmap } from "../../lib/data.js"
-
-export const dynamic = "force-static"
-
 export default function RoadmapPage() {
   return (
     <div>
@@ -95,52 +91,72 @@ export default function RoadmapPage() {
               <tr>
                 <td>1</td>
                 <td>QuickJS watch design and host policy</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Shared richer watch conformance</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>QuickJS real-host file-handle depth</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>4</td>
                 <td>Txiki richer file-handle semantics</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>5</td>
                 <td>Shared HTTP richer error coverage</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>6</td>
                 <td>Upload and multipart groundwork</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>7</td>
                 <td>QuickJS upload or explicit defer</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>8</td>
                 <td>Txiki artifact and dependency proofing</td>
-                <td><span className="badge badge-pass">Done</span></td>
+                <td>
+                  <span className="badge badge-pass">Done</span>
+                </td>
               </tr>
               <tr>
                 <td>9</td>
                 <td>Effect-core curated expansion</td>
-                <td><span className="badge badge-pass">Active</span></td>
+                <td>
+                  <span className="badge badge-pass">Active</span>
+                </td>
               </tr>
               <tr>
                 <td>10</td>
                 <td>Release-readiness checkpoint</td>
-                <td><span className="badge badge-neutral">Pending</span></td>
+                <td>
+                  <span className="badge badge-neutral">Pending</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -152,12 +168,12 @@ export default function RoadmapPage() {
           <div className="info-box-title">About this roadmap</div>
           <div className="info-box-content">
             <p>
-              This is a working document, not a commitment. Batches are adjusted as implementation 
+              This is a working document, not a commitment. Batches are adjusted as implementation
               evidence changes. Check the repo for current status.
             </p>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

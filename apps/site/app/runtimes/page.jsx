@@ -1,6 +1,6 @@
-import Link from "next/link"
+import Link from "next/link";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export default function RuntimesPage() {
   return (
@@ -23,9 +23,9 @@ export default function RuntimesPage() {
               <p className="card-subtitle">@effect-experimental/platform-quickjs</p>
             </div>
             <div className="card-content">
-              <p style={{marginBottom: '1rem'}}>
-                Native host adapter for QuickJS with expanded file-handle, watch, 
-                upload, redirect-follow, and keep-alive coverage.
+              <p style={{ marginBottom: "1rem" }}>
+                Native host adapter for QuickJS with expanded file-handle, watch, upload,
+                redirect-follow, and keep-alive coverage.
               </p>
               <ul className="feature-list">
                 <li>FileSystem (CRUD, temp, copy, handles, watch)</li>
@@ -46,9 +46,9 @@ export default function RuntimesPage() {
               <p className="card-subtitle">@effect-experimental/platform-txiki</p>
             </div>
             <div className="card-content">
-              <p style={{marginBottom: '1rem'}}>
-                Adapter for txiki.js — QuickJS with additional system APIs. 
-                Same coverage as QuickJS adapter.
+              <p style={{ marginBottom: "1rem" }}>
+                Adapter for txiki.js — QuickJS with additional system APIs. Same coverage as QuickJS
+                adapter.
               </p>
               <ul className="feature-list">
                 <li>FileSystem (CRUD, temp, copy, handles, watch)</li>
@@ -71,15 +71,14 @@ export default function RuntimesPage() {
 
         <div className="info-box">
           <div className="info-box-content">
-            <p style={{marginBottom: '1rem'}}>
-              <strong>QuickJS</strong> is a small, embeddable JavaScript engine by Fabrice Bellard. 
-              It implements ES2020 with a focus on size (~1MB) and startup speed. 
-              Ideal for plugins, extensions, and sandboxed scripting.
+            <p style={{ marginBottom: "1rem" }}>
+              <strong>QuickJS</strong> is a small, embeddable JavaScript engine by Fabrice Bellard.
+              It implements ES2020 with a focus on size (~1MB) and startup speed. Ideal for plugins,
+              extensions, and sandboxed scripting.
             </p>
             <p>
-              <strong>txiki.js</strong> builds on QuickJS, adding system APIs 
-              (networking, filesystem, child processes) similar to Node but retaining 
-              the small footprint.
+              <strong>txiki.js</strong> builds on QuickJS, adding system APIs (networking,
+              filesystem, child processes) similar to Node but retaining the small footprint.
             </p>
           </div>
         </div>
@@ -121,5 +120,5 @@ export default function RuntimesPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

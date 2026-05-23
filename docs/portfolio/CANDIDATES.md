@@ -1,4 +1,4 @@
-# Candidate runtimes
+# Candidate execution targets
 
 ## quickjs-core
 - smallest custom host path we know of today
@@ -18,5 +18,5 @@
 - useful for separating runtime innovation from practical shipping leverage
 
 ## workerd / LLRT / Javy
-- specialized labs only
-- not current mainline candidates
+- `workerd` is now an active platform-adapter track, not a host-runtime candidate
+- LLRT and Javy remain specialized-labs candidates only

@@ -1,10 +1,10 @@
 # Runtime Portfolio
 
-This folder tracks the runtime-adapter portfolio for Effect v4. The goal is to explore multiple adapters without mixing packages or over-claiming results.
+This folder tracks the execution-target portfolio for Effect v4. The goal is to explore host runtimes, wrapper runtimes, and platform adapters without mixing categories or over-claiming results.
 
 Portfolio guideposts:
 - share Effect-facing contracts where possible
-- keep runtime-specific adapters separate when the substrate differs
+- keep host runtimes, wrapper runtimes, and platform adapters separate when the substrate differs
 - keep scorecards and evidence visible
 - avoid production claims without matching build, test, and dependency proof
 - make gaps explicit (implemented, deferred, or unsupported)

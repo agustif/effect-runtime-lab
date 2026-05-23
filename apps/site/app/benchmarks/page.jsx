@@ -1,21 +1,26 @@
-import { loadRuntimeBench } from "../../lib/data.js"
-import { formatBytes, formatMs, formatRssKb } from "../../lib/format.js"
+import { loadRuntimeBench } from "../../lib/data.js";
+import { formatBytes, formatMs, formatRssKb } from "../../lib/format.js";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export default function BenchmarksPage() {
-  const bench = loadRuntimeBench()
-  const artifacts = bench?.artifacts ?? []
-  const startup = bench?.startup ?? []
+  const bench = loadRuntimeBench();
+  const artifacts = bench?.artifacts ?? [];
+  const startup = bench?.startup ?? [];
 
   // Group by runtime category
-  const embedded = startup.filter(s => ["quickjs-host", "txiki-runtime", "txiki-compiled"].includes(s.name))
-  const mainstream = startup.filter(s => ["node", "deno", "bun"].includes(s.name))
+  const embedded = startup.filter((s) =>
+    ["quickjs-host", "txiki-runtime", "txiki-compiled"].includes(s.name),
+  );
+  const mainstream = startup.filter((s) => ["node", "deno", "bun"].includes(s.name));
 
   // Find fastest mainstream for comparison
-  const fastestMainstream = mainstream.length > 0 
-    ? mainstream.reduce((fastest, current) => current.wallTimeMs < fastest.wallTimeMs ? current : fastest)
-    : null
+  const fastestMainstream =
+    mainstream.length > 0
+      ? mainstream.reduce((fastest, current) =>
+          current.wallTimeMs < fastest.wallTimeMs ? current : fastest,
+        )
+      : null;
 
   return (
     <div>
@@ -23,18 +28,20 @@ export default function BenchmarksPage() {
         <div className="section-header">
           <h1 className="section-title">Benchmarks</h1>
           <p className="section-description">
-            Startup performance comparison between embedded runtimes (QuickJS, txiki) 
-            and mainstream runtimes (Node, Deno, Bun).
+            Startup performance comparison between embedded runtimes (QuickJS, txiki) and mainstream
+            runtimes (Node, Deno, Bun).
           </p>
         </div>
 
         <div className="info-box">
           <div className="info-box-content">
             <p>
-              <strong>Platform:</strong> {bench?.platform?.os ?? "n/a"} / {bench?.platform?.arch ?? "n/a"} · Node {bench?.platform?.node ?? "n/a"}
+              <strong>Platform:</strong> {bench?.platform?.os ?? "n/a"} /{" "}
+              {bench?.platform?.arch ?? "n/a"} · Node {bench?.platform?.node ?? "n/a"}
             </p>
             <p>
-              <strong>Generated:</strong> {bench?.generatedAt ? new Date(bench.generatedAt).toLocaleString() : "not generated"}
+              <strong>Generated:</strong>{" "}
+              {bench?.generatedAt ? new Date(bench.generatedAt).toLocaleString() : "not generated"}
             </p>
           </div>
         </div>
@@ -62,26 +69,29 @@ export default function BenchmarksPage() {
                 {startup
                   .sort((a, b) => a.wallTimeMs - b.wallTimeMs)
                   .map((record, index) => {
-                    const isMainstream = ["node", "deno", "bun"].includes(record.name)
-                    const multiplier = fastestMainstream && fastestMainstream.wallTimeMs > 0
-                      ? (record.wallTimeMs / fastestMainstream.wallTimeMs).toFixed(1)
-                      : "—"
-                    
+                    const isMainstream = ["node", "deno", "bun"].includes(record.name);
+                    const multiplier =
+                      fastestMainstream && fastestMainstream.wallTimeMs > 0
+                        ? (record.wallTimeMs / fastestMainstream.wallTimeMs).toFixed(1)
+                        : "—";
+
                     return (
                       <tr key={record.name} className={index === 0 ? "highlight-row" : ""}>
                         <td>
                           <strong>{record.name}</strong>
                         </td>
                         <td>
-                          <span className={`badge ${isMainstream ? 'badge-neutral' : 'badge-pass'}`}>
-                            {isMainstream ? 'Mainstream' : 'Embedded'}
+                          <span
+                            className={`badge ${isMainstream ? "badge-neutral" : "badge-pass"}`}
+                          >
+                            {isMainstream ? "Mainstream" : "Embedded"}
                           </span>
                         </td>
                         <td>{formatMs(record.wallTimeMs)}</td>
                         <td>{formatRssKb(record.maxResidentSetKb)}</td>
-                        <td>{index === 0 ? 'baseline' : `${multiplier}×`}</td>
+                        <td>{index === 0 ? "baseline" : `${multiplier}×`}</td>
                       </tr>
-                    )
+                    );
                   })}
               </tbody>
             </table>
@@ -177,9 +187,9 @@ export default function BenchmarksPage() {
                 {artifacts.map((artifact) => (
                   <tr key={artifact.path}>
                     <td>
-                      <code className="inline-code">{artifact.path.split('/').pop()}</code>
+                      <code className="inline-code">{artifact.path.split("/").pop()}</code>
                       <br />
-                      <span className="text-muted" style={{fontSize: '0.75rem'}}>
+                      <span className="text-muted" style={{ fontSize: "0.75rem" }}>
                         {artifact.path}
                       </span>
                     </td>
@@ -202,5 +212,5 @@ export default function BenchmarksPage() {
         </div>
       )}
     </div>
-  )
+  );
 }

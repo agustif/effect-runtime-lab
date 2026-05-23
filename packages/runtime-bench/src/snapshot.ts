@@ -1,4 +1,4 @@
-import { writeRuntimeBenchSnapshot } from "./report.js"
+import { writeRuntimeBenchSnapshot } from "./report.js";
 
-const output = writeRuntimeBenchSnapshot()
-console.log(output)
+const output = writeRuntimeBenchSnapshot();
+console.log(output);

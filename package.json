@@ -3,9 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "fmt": "dprint fmt",
+    "lint": "oxlint packages/platform-cloudflare packages/platform-workerd packages/cloudflare-*",
     "build": "pnpm --filter @effect-experimental/platform-quickjs build && pnpm --filter @effect-experimental/platform-txiki build && pnpm --filter @effect-experimental/platform-microquickjs build",
+    "build:cloudflare": "pnpm --filter @effect-experimental/platform-workerd build && pnpm --filter @effect-experimental/platform-cloudflare build && pnpm --filter @effect-experimental/cloudflare-* build",
     "check": "pnpm --filter @effect-experimental/platform-quickjs check && pnpm --filter @effect-experimental/platform-txiki check && pnpm --filter @effect-experimental/platform-microquickjs check",
+    "check:cloudflare": "pnpm --filter @effect-experimental/platform-workerd check && pnpm --filter @effect-experimental/platform-cloudflare check && pnpm --filter @effect-experimental/cloudflare-* check",
     "test": "pnpm --filter @effect-experimental/platform-quickjs test && pnpm --filter @effect-experimental/platform-txiki test && pnpm --filter @effect-experimental/platform-microquickjs test && pnpm --filter @effect-experimental/effect-core-conformance test",
+    "test:cloudflare": "pnpm --filter @effect-experimental/platform-workerd test && pnpm --filter @effect-experimental/platform-cloudflare test && pnpm --filter @effect-experimental/cloudflare-d1 test && pnpm --filter @effect-experimental/cloudflare-kv test && pnpm --filter @effect-experimental/cloudflare-sqlite-do test",
     "test:watch": "pnpm --filter @effect-experimental/platform-quickjs test:watch",
     "vendor:status": "git submodule status --recursive",
     "vendor:update": "git submodule update --init --recursive",
@@ -16,6 +21,17 @@
     "bench:startup": "pnpm --filter @effect-experimental/runtime-bench startup",
     "conformance:inventory": "pnpm --filter @effect-experimental/effect-core-conformance inventory",
     "conformance:curated": "pnpm --filter @effect-experimental/effect-core-conformance curated",
-    "data:refresh": "pnpm --filter @effect-experimental/runtime-bench snapshot && pnpm --filter @effect-experimental/effect-core-conformance snapshot"
+    "data:refresh": "pnpm --filter @effect-experimental/runtime-bench snapshot && pnpm --filter @effect-experimental/effect-core-conformance snapshot",
+    "types:cloudflare": "pnpm --filter @effect-experimental/platform-workerd types:check",
+    "types:cloudflare:generate": "pnpm --filter @effect-experimental/platform-workerd types:generate"
+  },
+  "pnpm": {
+    "overrides": {
+      "@vitejs/plugin-react": "^5.2.0"
+    }
+  },
+  "devDependencies": {
+    "dprint": "^0.53.0",
+    "oxlint": "^1.56.0"
   }
 }

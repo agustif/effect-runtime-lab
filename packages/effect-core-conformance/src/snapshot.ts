@@ -1,4 +1,4 @@
-import { writeEffectCoreSnapshot } from "./report.js"
+import { writeEffectCoreSnapshot } from "./report.js";
 
-const output = await writeEffectCoreSnapshot()
-console.log(output)
+const output = await writeEffectCoreSnapshot();
+console.log(output);

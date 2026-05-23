@@ -1,0 +1,12 @@
+{
+  "name": "cloudflare-d1-tests",
+  "main": "./test/worker.ts",
+  "compatibility_date": "2026-03-12",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cloudflare-d1-tests",
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ]
+}

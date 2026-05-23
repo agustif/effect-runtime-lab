@@ -1,15 +1,15 @@
-import { loadEffectCoreConformance, loadRuntimeBench } from "../lib/data.js"
-import { formatBytes, formatMs, formatNumber, formatRssKb } from "../lib/format.js"
+import { loadEffectCoreConformance, loadRuntimeBench } from "../lib/data.js";
+import { formatBytes, formatMs, formatNumber } from "../lib/format.js";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export default function HomePage() {
-  const bench = loadRuntimeBench()
-  const conformance = loadEffectCoreConformance()
+  const bench = loadRuntimeBench();
+  const conformance = loadEffectCoreConformance();
 
-  const quickjsPassed = conformance?.curated?.passed ?? 0
-  const quickjsTotal = conformance?.curated?.total ?? 0
-  const quickjsRate = quickjsTotal > 0 ? Math.round((quickjsPassed / quickjsTotal) * 100) : 0
+  const quickjsPassed = conformance?.curated?.passed ?? 0;
+  const quickjsTotal = conformance?.curated?.total ?? 0;
+  const quickjsRate = quickjsTotal > 0 ? Math.round((quickjsPassed / quickjsTotal) * 100) : 0;
 
   return (
     <div>
@@ -17,9 +17,8 @@ export default function HomePage() {
       <section className="hero">
         <h1 className="hero-title">Effect for embedded JavaScript engines</h1>
         <p className="hero-description">
-          Platform adapters that run Effect programs on QuickJS and txiki.js. 
-          For sandboxed plugins, edge functions, and resource-constrained environments 
-          where Node.js is too heavy.
+          Platform adapters that run Effect programs on QuickJS and txiki.js. For sandboxed plugins,
+          edge functions, and resource-constrained environments where Node.js is too heavy.
         </p>
         <div className="hero-meta">
           <span>Effect v4</span>
@@ -36,13 +35,26 @@ export default function HomePage() {
           <div className="info-box-title">What this project does</div>
           <div className="info-box-content">
             <p>
-              <a href="https://effect.website" target="_blank" rel="noopener noreferrer">Effect</a> is a functional effect system for TypeScript. 
-              This project provides platform adapters that implement Effect's runtime services 
-              (FileSystem, HttpClient, Path, etc.) for embedded JS engines.
+              <a href="https://effect.website" target="_blank" rel="noopener noreferrer">
+                Effect
+              </a>{" "}
+              is a functional effect system for TypeScript. This project provides platform adapters
+              that implement Effect&apos;s runtime services (FileSystem, HttpClient, Path, etc.) for
+              embedded JS engines.
             </p>
             <p>
-              <a href="https://bellard.org/quickjs/" target="_blank" rel="noopener noreferrer">QuickJS</a> is a small embeddable JS engine (~1MB). 
-              <a href="https://github.com/saghul/txiki.js" target="_blank" rel="noopener noreferrer">txiki.js</a> builds on QuickJS with additional system APIs.
+              <a href="https://bellard.org/quickjs/" target="_blank" rel="noopener noreferrer">
+                QuickJS
+              </a>{" "}
+              is a small embeddable JS engine (~1MB).
+              <a
+                href="https://github.com/saghul/txiki.js"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                txiki.js
+              </a>{" "}
+              builds on QuickJS with additional system APIs.
             </p>
           </div>
         </div>
@@ -61,18 +73,24 @@ export default function HomePage() {
           <div className="summary-card">
             <span className="summary-card-label">Conformance</span>
             <span className="summary-card-value">{quickjsRate}%</span>
-            <span className="summary-card-meta">{formatNumber(quickjsPassed)} of {formatNumber(quickjsTotal)} tests passing</span>
+            <span className="summary-card-meta">
+              {formatNumber(quickjsPassed)} of {formatNumber(quickjsTotal)} tests passing
+            </span>
           </div>
-          
+
           <div className="summary-card">
             <span className="summary-card-label">QuickJS artifact</span>
-            <span className="summary-card-value">{formatBytes(bench?.artifacts?.find(a => a.path.includes("quickjs"))?.size)}</span>
+            <span className="summary-card-value">
+              {formatBytes(bench?.artifacts?.find((a) => a.path.includes("quickjs"))?.size)}
+            </span>
             <span className="summary-card-meta">Native host binary</span>
           </div>
-          
+
           <div className="summary-card">
             <span className="summary-card-label">Startup time</span>
-            <span className="summary-card-value">{formatMs(bench?.startup?.find(s => s.name === "quickjs-host")?.wallTimeMs)}</span>
+            <span className="summary-card-value">
+              {formatMs(bench?.startup?.find((s) => s.name === "quickjs-host")?.wallTimeMs)}
+            </span>
             <span className="summary-card-meta">Cold start</span>
           </div>
         </div>
@@ -81,7 +99,7 @@ export default function HomePage() {
       {/* What's implemented */}
       <section className="section">
         <div className="section-header">
-          <h2 className="section-title">What's working</h2>
+          <h2 className="section-title">What&apos;s working</h2>
         </div>
 
         <div className="grid grid-2">
@@ -157,19 +175,31 @@ export default function HomePage() {
             </thead>
             <tbody>
               <tr>
-                <td><code className="inline-code">@effect-experimental/platform-quickjs</code></td>
+                <td>
+                  <code className="inline-code">@effect-experimental/platform-quickjs</code>
+                </td>
                 <td>QuickJS host adapter with native bindings</td>
-                <td><span className="badge badge-pass">Active</span></td>
+                <td>
+                  <span className="badge badge-pass">Active</span>
+                </td>
               </tr>
               <tr>
-                <td><code className="inline-code">@effect-experimental/platform-txiki</code></td>
+                <td>
+                  <code className="inline-code">@effect-experimental/platform-txiki</code>
+                </td>
                 <td>txiki.js adapter</td>
-                <td><span className="badge badge-pass">Active</span></td>
+                <td>
+                  <span className="badge badge-pass">Active</span>
+                </td>
               </tr>
               <tr>
-                <td><code className="inline-code">@effect-experimental/platform-quickjs-shared</code></td>
+                <td>
+                  <code className="inline-code">@effect-experimental/platform-quickjs-shared</code>
+                </td>
                 <td>Shared QuickJS-family core</td>
-                <td><span className="badge badge-pass">Active</span></td>
+                <td>
+                  <span className="badge badge-pass">Active</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -201,5 +231,5 @@ const runnable = program.pipe(
         </div>
       </section>
     </div>
-  )
+  );
 }

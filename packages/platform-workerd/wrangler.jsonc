@@ -1,0 +1,31 @@
+{
+  "name": "platform-workerd-tests",
+  "main": "./test/worker.ts",
+  "compatibility_date": "2026-03-12",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "COUNTER",
+        "class_name": "CounterDurableObject"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "CounterDurableObject"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "platform-workerd-workflow",
+      "binding": "WORKFLOW",
+      "class_name": "ExampleWorkflow"
+    }
+  ]
+}

@@ -1,22 +1,19 @@
-import { loadSupportMatrix, loadScorecard, loadRuntimeReadme } from "../../../lib/data.js"
+import { loadSupportMatrix, loadScorecard, loadRuntimeReadme } from "../../../lib/data.js";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
-export const generateStaticParams = () => [
-  { runtime: "quickjs" },
-  { runtime: "txiki" }
-]
+export const generateStaticParams = () => [{ runtime: "quickjs" }, { runtime: "txiki" }];
 
 const titleMap = {
   quickjs: "QuickJS Runtime",
-  txiki: "txiki Runtime"
-}
+  txiki: "txiki Runtime",
+};
 
 export default function RuntimeDetailPage({ params }) {
-  const runtime = params?.runtime ?? "quickjs"
-  const supportMatrix = loadSupportMatrix(runtime) ?? "Support matrix not found."
-  const scorecard = loadScorecard(runtime) ?? "Scorecard not found."
-  const readme = loadRuntimeReadme(runtime) ?? "README not found."
+  const runtime = params?.runtime ?? "quickjs";
+  const supportMatrix = loadSupportMatrix(runtime) ?? "Support matrix not found.";
+  const scorecard = loadScorecard(runtime) ?? "Scorecard not found.";
+  const readme = loadRuntimeReadme(runtime) ?? "README not found.";
 
   return (
     <div className="section">
@@ -38,5 +35,5 @@ export default function RuntimeDetailPage({ params }) {
         <pre>{readme}</pre>
       </div>
     </div>
-  )
+  );
 }

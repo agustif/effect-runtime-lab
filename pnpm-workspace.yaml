@@ -2,4 +2,6 @@ packages:
   - packages/*
   - apps/*
   - vendor/effect-smol/packages/effect
+  - vendor/effect-smol/packages/sql/d1
+  - vendor/effect-smol/packages/sql/sqlite-do
   - vendor/effect-smol/packages/vitest

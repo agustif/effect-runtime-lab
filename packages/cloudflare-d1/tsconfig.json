@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../vendor/effect-smol/tsconfig.base.json",
+  "include": [
+    "src",
+    "examples",
+    "test"
+  ],
+  "references": [
+    {
+      "path": "../../vendor/effect-smol/packages/effect"
+    },
+    {
+      "path": "../../vendor/effect-smol/packages/sql/d1"
+    }
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": [
+      "@cloudflare/workers-types",
+      "node"
+    ],
+    "outDir": "./lib"
+  }
+}

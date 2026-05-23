@@ -14,6 +14,7 @@ Shared, executable contract helpers for runtime candidates.
 - `WatchContract.verifyWatchChurnLayer` - watch churn helper for rapid create/update/remove bursts
 - `WatchContract.verifyWatchRenameLayer` - rename helper (expects remove/create for renamed path)
 - `RedirectContract.verifyRedirectHttpClientLayer` - shared local redirect-follow contract helper
+- `UnstableTmpFsContract.verifyBasicTmpFs` - unstable tmp filesystem helper
 - `UploadContract.verifyBasicUploadHttpClientLayer` - shared byte-upload, stream-body upload, and multipart-form upload contract helper
 - `UploadContract.verifyAdvancedUploadHttpClientLayer` - deeper stream and multipart coverage (multi-file, missing content-length, large stream)
 - `UploadContract.verifyStrictUploadHttpClientLayer` - host-backed multipart boundary/error coverage

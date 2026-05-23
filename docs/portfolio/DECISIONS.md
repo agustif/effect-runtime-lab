@@ -15,6 +15,14 @@ Reason:
 - different deployment and dependency guarantees
 - clearer docs, tests, and support boundaries
 
+## D3b. Workers classification
+`platform-workerd` is a Workers platform adapter, not a host-runtime package in the same class as `platform-quickjs` or `platform-txiki`.
+
+Reason:
+- its primary job is to integrate Effect code with Workers execution roots and capabilities
+- it does not define the same broad host surface or parity target as the host-runtime tracks
+- its truth surface is `workers-types` + `wrangler types` + Workers runtime behavior, not the shared host-runtime contract matrix
+
 ## D4. Documentation standard
 Please avoid claiming a runtime or platform capability without either:
 - package-local tests

@@ -1,0 +1,11 @@
+{
+  "name": "cloudflare-kv-tests",
+  "main": "./test/worker.ts",
+  "compatibility_date": "2026-03-12",
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "00000000000000000000000000000000"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../vendor/effect-smol/tsconfig.base.json",
+  "include": [
+    "src",
+    "test"
+  ],
+  "references": [
+    {
+      "path": "../../vendor/effect-smol/packages/effect"
+    },
+    {
+      "path": "../../vendor/effect-smol/packages/sql/sqlite-do"
+    }
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": [
+      "@cloudflare/workers-types",
+      "node"
+    ],
+    "outDir": "./lib"
+  }
+}

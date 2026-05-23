@@ -2,4 +2,4 @@
  * @since 1.0.0
  */
 
-export * from "./QuickJSRuntime.ts"
+export * from "./QuickJSRuntime.ts";

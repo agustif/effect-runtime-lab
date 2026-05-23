@@ -1,6 +1,8 @@
 # Shared test matrix
 
-We try to measure each runtime candidate against the same categories, even when implementations differ.
+We try to measure each host-runtime candidate against the same categories, even when implementations differ.
+
+Workers platform adapters use a different matrix and should not be forced into the host-runtime parity shape.
 
 ## Contract categories
 - runtime bootstrap / `runMain`
@@ -38,3 +40,11 @@ We try to measure each runtime candidate against the same categories, even when 
 - `packages/runtime-conformance/src/HttpFixture.ts`
 - `packages/runtime-bench/src/artifacts.ts`
 - `packages/runtime-bench/src/startup.ts`
+
+## Workers platform-adapter categories
+- invocation context (`props`, `waitUntil`, `passThroughOnException`)
+- loopback exports / `ctx.exports`
+- WorkerEntrypoint RPC
+- Durable Object lifecycle and runtime reuse
+- Workflow entrypoint execution
+- binding-bridge smoke tests for D1, KV, and SQLite Durable Objects

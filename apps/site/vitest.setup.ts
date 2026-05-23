@@ -1,14 +1,14 @@
-import { expect } from "vitest"
-import * as matchers from "@testing-library/jest-dom/matchers"
-import { cleanup } from "@testing-library/react"
+import { expect, afterEach, vi } from "vitest";
+import * as matchers from "@testing-library/jest-dom/matchers";
+import { cleanup } from "@testing-library/react";
 
 // Extend Vitest's expect with Testing Library matchers
-expect.extend(matchers)
+expect.extend(matchers);
 
 // Cleanup after each test
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});
 
 // Mock Next.js navigation
 vi.mock("next/navigation", () => ({
@@ -23,7 +23,7 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
   redirect: vi.fn(),
-}))
+}));
 
 // Mock next/headers
 vi.mock("next/headers", () => ({
@@ -33,4 +33,4 @@ vi.mock("next/headers", () => ({
     set: vi.fn(),
     delete: vi.fn(),
   }),
-}))
+}));

@@ -3,11 +3,11 @@
  */
 
 export interface QuickJSRuntime {
-  executeCode(code: string, filename?: string): Promise<unknown>
-  dispose(): void
+  executeCode(code: string, filename?: string): Promise<unknown>;
+  dispose(): void;
 }
 
 export interface QuickJSRuntimeOptions {
-  enableModuleLoader?: boolean
-  moduleBasePath?: string
+  enableModuleLoader?: boolean;
+  moduleBasePath?: string;
 }

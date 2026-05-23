@@ -1,0 +1,33 @@
+{
+  "name": "@effect-experimental/platform-cloudflare",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": [],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./unstable/*": "./src/unstable/*.ts",
+    "./internal/*": null,
+    "./*/index": null
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "effect": "workspace:^"
+  },
+  "dependencies": {
+    "@effect-experimental/cloudflare-kv": "workspace:*",
+    "@effect-experimental/platform-workerd": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
+  }
+}
