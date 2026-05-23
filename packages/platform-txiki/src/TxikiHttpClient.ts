@@ -2,9 +2,9 @@
  * @since 1.0.0
  */
 import * as Effect from "effect/Effect";
+import * as Context from "effect/Context";
 import { dual } from "effect/Function";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 import * as Stream from "effect/Stream";
 import * as HttpBody from "effect/unstable/http/HttpBody";
 import * as HttpClient from "effect/unstable/http/HttpClient";
@@ -12,7 +12,7 @@ import * as HttpClientError from "effect/unstable/http/HttpClientError";
 import * as Cookies from "effect/unstable/http/Cookies";
 import * as HttpClientResponse from "effect/unstable/http/HttpClientResponse";
 
-export const TxikiOptions = ServiceMap.Reference<{
+export const TxikiOptions = Context.Reference<{
   readonly timeoutMs?: number;
 }>("@effect-experimental/platform-txiki/TxikiHttpClient/TxikiOptions", {
   defaultValue: () => ({}),
@@ -307,7 +307,7 @@ const makeClient = HttpClient.make((request, url, signal, fiber) =>
 
     const response = yield* Effect.tryPromise({
       try: async () =>
-        fetch(url, {
+        fetch(url.toString(), {
           method: request.method,
           headers: {
             ...toFetchHeaders(request.headers as Record<string, string>),

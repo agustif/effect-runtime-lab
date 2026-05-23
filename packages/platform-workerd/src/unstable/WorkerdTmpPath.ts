@@ -1,8 +1,8 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Data from "effect/Data";
-import * as ServiceMap from "effect/ServiceMap";
 
 const TypeId = "~@effect-experimental/platform-workerd/unstable/WorkerdTmpPath";
 
@@ -29,8 +29,8 @@ export interface WorkerdTmpPath {
  * @since 1.0.0
  * @category tags
  */
-export const WorkerdTmpPath: ServiceMap.Service<WorkerdTmpPath, WorkerdTmpPath> =
-  ServiceMap.Service(TypeId);
+export const WorkerdTmpPath: Context.Service<WorkerdTmpPath, WorkerdTmpPath> =
+  Context.Service(TypeId);
 
 /**
  * @since 1.0.0

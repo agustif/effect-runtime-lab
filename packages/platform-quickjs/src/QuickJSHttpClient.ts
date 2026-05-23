@@ -3,6 +3,7 @@
  */
 import * as Arr from "effect/Array";
 import * as Cause from "effect/Cause";
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import { dual } from "effect/Function";
 import * as Headers from "effect/unstable/http/Headers";
@@ -17,7 +18,6 @@ import * as Layer from "effect/Layer";
 import * as Option from "effect/Option";
 import { pipeArguments, type Pipeable } from "effect/Pipeable";
 import * as Schema from "effect/Schema";
-import * as ServiceMap from "effect/ServiceMap";
 import * as Stream from "effect/Stream";
 import * as UrlParams from "effect/unstable/http/UrlParams";
 
@@ -52,7 +52,7 @@ declare const globalThis: {
  * @since 1.0.0
  * @category QuickJS
  */
-export const QuickJSOptions = ServiceMap.Reference<{
+export const QuickJSOptions = Context.Reference<{
   readonly insecure?: boolean;
   readonly follow?: boolean;
   readonly ca?: string;

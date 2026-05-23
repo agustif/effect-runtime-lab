@@ -5,9 +5,9 @@ import {
   type WorkflowEvent,
   type WorkflowStep,
 } from "cloudflare:workers";
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 import * as HttpServerResponse from "effect/unstable/http/HttpServerResponse";
 import * as WorkerdContext from "../src/WorkerdContext.ts";
 import * as WorkerdDurableObject from "../src/WorkerdDurableObject.ts";
@@ -55,10 +55,10 @@ export class CounterDurableObject extends DurableObject<Env> {
     this.runtime = WorkerdDurableObject.makeRuntime(
       env,
       ctx,
-      Layer.effectServices(
+      Layer.effectContext(
         Effect.sync(() => {
           this.builds += 1;
-          return ServiceMap.empty();
+          return Context.empty();
         }),
       ),
     );

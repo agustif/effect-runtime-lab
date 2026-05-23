@@ -1,9 +1,9 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 import * as KeyValueStore from "effect/unstable/persistence/KeyValueStore";
 
 const TypeId = "~@effect-experimental/cloudflare-kv/CloudflareKv";
@@ -22,8 +22,8 @@ export interface CloudflareKv {
  * @since 1.0.0
  * @category tags
  */
-export const CloudflareKv: ServiceMap.Service<CloudflareKv, CloudflareKv> =
-  ServiceMap.Service(TypeId);
+export const CloudflareKv: Context.Service<CloudflareKv, CloudflareKv> =
+  Context.Service(TypeId);
 
 /**
  * @since 1.0.0
@@ -109,11 +109,11 @@ export const make = (binding: KVNamespace): CloudflareKv => {
 export const layer = (
   binding: KVNamespace,
 ): Layer.Layer<CloudflareKv | KeyValueStore.KeyValueStore> =>
-  Layer.effectServices(
+  Layer.effectContext(
     Effect.sync(() => {
       const service = make(binding);
-      return ServiceMap.make(CloudflareKv, service).pipe(
-        ServiceMap.add(KeyValueStore.KeyValueStore, service.keyValueStore),
+      return Context.make(CloudflareKv, service).pipe(
+        Context.add(KeyValueStore.KeyValueStore, service.keyValueStore),
       );
     }),
   );

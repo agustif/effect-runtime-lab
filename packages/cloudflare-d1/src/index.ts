@@ -2,8 +2,8 @@
  * @since 1.0.0
  */
 import * as D1 from "@effect/sql-d1";
+import * as Context from "effect/Context";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 
 const TypeId = "~@effect-experimental/cloudflare-d1/CloudflareD1";
 
@@ -20,8 +20,8 @@ export interface CloudflareD1 {
  * @since 1.0.0
  * @category tags
  */
-export const CloudflareD1: ServiceMap.Service<CloudflareD1, CloudflareD1> =
-  ServiceMap.Service(TypeId);
+export const CloudflareD1: Context.Service<CloudflareD1, CloudflareD1> =
+  Context.Service(TypeId);
 
 /**
  * @since 1.0.0

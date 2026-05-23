@@ -5,6 +5,7 @@ import { createServer } from "node:http";
 import { existsSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(__dirname, "..");
@@ -26,6 +27,7 @@ const prodFiles = [
   "httpclient.prod.ts",
   "watch.prod.ts",
 ];
+const testTimeoutMs = 10_000;
 
 const server = createServer((req, res) => {
   if (req.url === "/json") {
@@ -164,18 +166,17 @@ const fixtureBaseUrl = `http://127.0.0.1:${address.port}`;
 for (const file of prodFiles) {
   const input = join(packageRoot, "test/prod", file);
   const output = join(distDir, file.replace(/\.ts$/, ".js"));
-  const result = await Bun.build({
-    entrypoints: [input],
+  await build({
+    entryPoints: [input],
     outfile: output,
-    target: "node",
+    bundle: true,
     format: "esm",
+    platform: "neutral",
+    target: "es2022",
     define: {
       __FIXTURE_BASE_URL__: JSON.stringify(fixtureBaseUrl),
     },
   });
-  if (!result.success) {
-    throw new Error(`failed to bundle txiki prod file: ${file}`);
-  }
 }
 
 let failed = false;
@@ -188,8 +189,16 @@ for (const file of prodFiles) {
         stdio: "inherit",
         cwd: repoRoot,
       });
-      child.once("error", reject);
+      const timeout = setTimeout(() => {
+        child.kill("SIGTERM");
+        reject(new Error(`txiki prod file timed out: ${file}`));
+      }, testTimeoutMs);
+      child.once("error", (error) => {
+        clearTimeout(timeout);
+        reject(error);
+      });
       child.once("exit", (code, signal) => {
+        clearTimeout(timeout);
         if (code === 0) {
           resolve(undefined);
           return;

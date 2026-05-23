@@ -12,6 +12,9 @@
     },
     {
       "path": "../../vendor/effect-smol/packages/sql/d1"
+    },
+    {
+      "path": "../platform-workerd"
     }
   ],
   "compilerOptions": {

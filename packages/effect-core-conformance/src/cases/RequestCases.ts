@@ -1,19 +1,20 @@
-import { Array, Fiber, Ref, ServiceMap } from "effect";
+import { Array, Fiber, Ref } from "effect";
 import * as Cause from "effect/Cause";
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
 import { flow } from "effect/Function";
 import * as Request from "effect/Request";
 import * as Resolver from "effect/RequestResolver";
 
-class Counter extends ServiceMap.Service<Counter, { count: number }>()("Counter") {}
-class Requests extends ServiceMap.Service<Requests, { count: number }>()("Requests") {}
-class Interrupts extends ServiceMap.Reference("Interrupts", {
+class Counter extends Context.Service<Counter, { count: number }>()("Counter") {}
+class Requests extends Context.Service<Requests, { count: number }>()("Requests") {}
+const Interrupts = Context.Reference<{ interrupts: number }>("Interrupts", {
   defaultValue: () => ({ interrupts: 0 }),
-}) {}
-class RequestService extends ServiceMap.Reference("RequestService", {
+});
+const RequestService = Context.Reference<{ value: string }>("RequestService", {
   defaultValue: () => ({ value: "default" }),
-}) {}
+});
 
 const delay = <A, E, R>(self: Effect.Effect<A, E, R>) =>
   Effect.andThen(
@@ -95,7 +96,7 @@ const makeUserResolver = Effect.gen(function* () {
   const getNames = getIds.pipe(
     Effect.flatMap(Effect.forEach(getNameById, { concurrency: "unbounded" })),
     Effect.onInterrupt(() =>
-      Effect.tap(Interrupts.asEffect(), (state) => {
+      Effect.tap(Interrupts, (state) => {
         state.interrupts++;
         return Effect.void;
       }),

@@ -1,11 +1,11 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FetchHttpClient from "effect/unstable/http/FetchHttpClient";
 import * as HttpEffect from "effect/unstable/http/HttpEffect";
 import * as HttpServerResponse from "effect/unstable/http/HttpServerResponse";
-import * as ServiceMap from "effect/ServiceMap";
 import * as WorkerdContext from "./WorkerdContext.ts";
 import type * as WorkerdServices from "./WorkerdServices.ts";
 
@@ -37,19 +37,16 @@ const provideInvocation = <Env, Props, Exports, A, E>(
     readonly event?: unknown;
   },
 ): Effect.Effect<A, E> =>
-  Effect.provideServices(
+  Effect.provide(
     effect.pipe(Effect.provide(FetchHttpClient.layer)),
-    ServiceMap.make(
-      WorkerdContext.WorkerdContext,
-      WorkerdContext.make({
-        env,
-        ctx,
-        eventKind,
-        request: options?.request,
-        event: options?.event,
-        exports: resolveLoopbackExports(ctx, options?.exports),
-      }),
-    ),
+    Context.make(WorkerdContext.WorkerdContext, WorkerdContext.make({
+      env,
+      ctx,
+      eventKind,
+      request: options?.request,
+      event: options?.event,
+      exports: resolveLoopbackExports(ctx, options?.exports),
+    })),
   );
 
 /**

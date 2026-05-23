@@ -7,10 +7,10 @@ import {
   type HostObject,
   type MQuickJSOptions,
 } from "@ok.lol/mquickjs";
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
 import * as PlatformError from "effect/PlatformError";
-import * as ServiceMap from "effect/ServiceMap";
 import type { QuickJSRuntime } from "@effect-experimental/platform-quickjs-shared";
 
 const runtimeError = (method: string, description: string, cause: unknown) =>
@@ -62,7 +62,7 @@ export const exposeEffect = (runtime: MicroQuickJSRuntime, name: string, object:
     catch: (cause) => runtimeError("expose", `failed to expose host object '${name}'`, cause),
   });
 
-export class MicroQuickJSEngine extends ServiceMap.Service<
+export class MicroQuickJSEngine extends Context.Service<
   MicroQuickJSEngine,
   MicroQuickJSRuntime
 >()("@effect-experimental/platform-microquickjs/MicroQuickJSEngine") {}

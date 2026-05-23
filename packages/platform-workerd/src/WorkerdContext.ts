@@ -1,10 +1,10 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 
 const TypeId = "~@effect-experimental/platform-workerd/WorkerdContext";
 
@@ -93,8 +93,8 @@ export interface WorkerdContext {
  * @since 1.0.0
  * @category tags
  */
-export const WorkerdContext: ServiceMap.Service<WorkerdContext, WorkerdContext> =
-  ServiceMap.Service(TypeId);
+export const WorkerdContext: Context.Service<WorkerdContext, WorkerdContext> =
+  Context.Service(TypeId);
 
 const expectDefined = <A>(
   value: A | undefined,
@@ -133,9 +133,9 @@ export const make = <
     passThroughOnException: getPassThroughOnException(options.ctx),
     waitUntil: <A, E, R>(effect: Effect.Effect<A, E, R>) =>
       Effect.gen(function* () {
-        const services = yield* Effect.services<R>();
+        const services = yield* Effect.context<R>();
         options.ctx.waitUntil(
-          Effect.runPromiseExit(Effect.provideServices(effect, services)).then(() => undefined),
+          Effect.runPromiseExit(Effect.provide(effect, services)).then(() => undefined),
         );
       }),
   });

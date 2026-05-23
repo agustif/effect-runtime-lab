@@ -70,14 +70,14 @@ export const makeRuntime = <Env, Props>(
         Layer.buildWithMemoMap(workerdLayer, memoMap, scope),
       );
 
-      return Effect.runPromise(Effect.provideServices(effect, services));
+      return Effect.runPromise(Effect.provide(effect, services));
     }
 
     const services = await Effect.runPromise(
       Layer.buildWithMemoMap(Layer.mergeAll(baseLayer, workerdLayer), memoMap, scope),
     );
 
-    return Effect.runPromise(Effect.provideServices(effect, services));
+    return Effect.runPromise(Effect.provide(effect, services));
   };
 
   return {

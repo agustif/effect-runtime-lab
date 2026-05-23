@@ -1,10 +1,10 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 import * as WorkerdTmpPath from "./WorkerdTmpPath.ts";
 
 const TypeId = "~@effect-experimental/platform-workerd/unstable/WorkerdTmpFileSystem";
@@ -40,8 +40,8 @@ export interface WorkerdTmpFileSystem {
  * @since 1.0.0
  * @category tags
  */
-export const WorkerdTmpFileSystem: ServiceMap.Service<WorkerdTmpFileSystem, WorkerdTmpFileSystem> =
-  ServiceMap.Service(TypeId);
+export const WorkerdTmpFileSystem: Context.Service<WorkerdTmpFileSystem, WorkerdTmpFileSystem> =
+  Context.Service(TypeId);
 
 const withFs = <A>(
   operation: string,

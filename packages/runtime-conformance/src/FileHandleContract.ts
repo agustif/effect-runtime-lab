@@ -1,6 +1,7 @@
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import type * as Layer from "effect/Layer";
+import * as Option from "effect/Option";
 import * as PlatformError from "effect/PlatformError";
 
 export interface FileHandleContractOptions {
@@ -11,6 +12,10 @@ export interface FileHandleContractOptions {
 
 const decode = (bytes: Uint8Array) => new TextDecoder().decode(bytes);
 const encode = (value: string) => new TextEncoder().encode(value);
+const expectRead = (
+  result: Option.Option<Uint8Array>,
+  label: string,
+): Uint8Array => Option.getOrThrowWith(result, () => new Error(`${label} reached EOF`));
 
 const resolveSystemTag = (
   error: PlatformError.PlatformError,
@@ -51,9 +56,10 @@ export const verifyBasicFileHandleLayer = async (
           const file = yield* fs.open(path, { flag: "w+" });
           yield* file.write(encode("hello world"));
           yield* file.seek(FileSystem.Size(0), "start");
-          const initial = yield* file
-            .readAlloc(FileSystem.Size(11))
-            .pipe(Effect.flatMap((_) => _.asEffect()));
+          const initial = expectRead(
+            yield* file.readAlloc(FileSystem.Size(11)),
+            "file-handle initial read",
+          );
           if (decode(initial) !== "hello world") {
             throw new Error(`file-handle read/write contract failed: ${decode(initial)}`);
           }
@@ -111,9 +117,10 @@ export const verifyBasicFileHandleLayer = async (
             throw new Error(`file-handle append contract failed: ${decode(firstAppend)}`);
           }
 
-          const firstRead = yield* file
-            .readAlloc(FileSystem.Size(3))
-            .pipe(Effect.flatMap((_) => _.asEffect()));
+          const firstRead = expectRead(
+            yield* file.readAlloc(FileSystem.Size(3)),
+            "file-handle append first read",
+          );
           if (decode(firstRead) !== "foo") {
             throw new Error(`file-handle append read cursor contract failed: ${decode(firstRead)}`);
           }
@@ -124,9 +131,10 @@ export const verifyBasicFileHandleLayer = async (
             throw new Error(`file-handle append write contract failed: ${decode(secondAppend)}`);
           }
 
-          const secondRead = yield* file
-            .readAlloc(FileSystem.Size(6))
-            .pipe(Effect.flatMap((_) => _.asEffect()));
+          const secondRead = expectRead(
+            yield* file.readAlloc(FileSystem.Size(6)),
+            "file-handle append second read",
+          );
           if (decode(secondRead) !== "barbaz") {
             throw new Error(
               `file-handle append cursor persistence contract failed: ${decode(secondRead)}`,
@@ -159,9 +167,10 @@ export const verifyAdvancedFileHandleLayer = async (
           const file = yield* fs.open(path, { flag: "w+" });
           yield* file.write(encode("abcdef"));
           yield* file.seek(FileSystem.Size(2), "start");
-          const middle = yield* file
-            .readAlloc(FileSystem.Size(2))
-            .pipe(Effect.flatMap((_) => _.asEffect()));
+          const middle = expectRead(
+            yield* file.readAlloc(FileSystem.Size(2)),
+            "file-handle middle read",
+          );
           if (decode(middle) !== "cd") {
             throw new Error(`file-handle seek/start contract failed: ${decode(middle)}`);
           }

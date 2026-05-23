@@ -1,9 +1,9 @@
 /**
  * @since 1.0.0
  */
+import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FetchHttpClient from "effect/unstable/http/FetchHttpClient";
-import * as ServiceMap from "effect/ServiceMap";
 import * as WorkerdContext from "./WorkerdContext.ts";
 import * as WorkerdRpc from "./WorkerdRpc.ts";
 import type * as WorkerdServices from "./WorkerdServices.ts";
@@ -25,19 +25,16 @@ const provideInvocation = <Env, Props, Exports, Event, A, E>(
   effect: Effect.Effect<A, E, WorkerdServices.WorkerdServices>,
   options: EntrypointInvocationOptions<Exports, Event>,
 ): Effect.Effect<A, E> =>
-  Effect.provideServices(
+  Effect.provide(
     effect.pipe(Effect.provide(FetchHttpClient.layer)),
-    ServiceMap.make(
-      WorkerdContext.WorkerdContext,
-      WorkerdContext.make({
-        env,
-        ctx,
-        eventKind: options.eventKind,
-        request: options.request,
-        exports: options.exports,
-        event: options.event,
-      }),
-    ),
+    Context.make(WorkerdContext.WorkerdContext, WorkerdContext.make({
+      env,
+      ctx,
+      eventKind: options.eventKind,
+      request: options.request,
+      exports: options.exports,
+      event: options.event,
+    })),
   );
 
 /**

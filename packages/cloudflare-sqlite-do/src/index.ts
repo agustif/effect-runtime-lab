@@ -2,8 +2,8 @@
  * @since 1.0.0
  */
 import * as SqliteDo from "@effect/sql-sqlite-do";
+import * as Context from "effect/Context";
 import * as Layer from "effect/Layer";
-import * as ServiceMap from "effect/ServiceMap";
 
 const TypeId = "~@effect-experimental/cloudflare-sqlite-do/CloudflareSqliteDo";
 
@@ -20,8 +20,8 @@ export interface CloudflareSqliteDo {
  * @since 1.0.0
  * @category tags
  */
-export const CloudflareSqliteDo: ServiceMap.Service<CloudflareSqliteDo, CloudflareSqliteDo> =
-  ServiceMap.Service(TypeId);
+export const CloudflareSqliteDo: Context.Service<CloudflareSqliteDo, CloudflareSqliteDo> =
+  Context.Service(TypeId);
 
 /**
  * @since 1.0.0

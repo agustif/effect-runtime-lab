@@ -1,11 +1,14 @@
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
 import * as FileSystem from "effect/FileSystem";
+import * as Option from "effect/Option";
 import * as Stream from "effect/Stream";
 import * as QuickJSFileSystem from "../../src/QuickJSFileSystem.ts";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
+const expectRead = (result: Option.Option<Uint8Array>) =>
+  Option.getOrThrowWith(result, () => new Error("readAlloc reached EOF"));
 
 const main = Effect.gen(function* () {
   const fs = yield* FileSystem.FileSystem;
@@ -32,7 +35,7 @@ const main = Effect.gen(function* () {
       yield* handle.write(encoder.encode(" world"));
       yield* handle.sync;
       yield* handle.seek(0, "start");
-      const firstRead = yield* handle.readAlloc(5).pipe(Effect.flatMap((_) => _.asEffect()));
+      const firstRead = expectRead(yield* handle.readAlloc(5));
       if (decoder.decode(firstRead) !== "hello") {
         throw new Error("append read cursor failed");
       }
