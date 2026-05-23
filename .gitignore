@@ -1,6 +1,5 @@
 node_modules/
 .DS_Store
-pnpm-lock.yaml
 packages/*/dist/
 packages/*/dist-prod/
 packages/*/lib/
