@@ -18,7 +18,7 @@
     "effect": "workspace:^"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.13.1",
+    "@cloudflare/vitest-pool-workers": "^0.16.9",
     "@cloudflare/workers-types": "4.20260317.1",
     "@effect-experimental/platform-workerd": "workspace:*",
     "@effect/sql-d1": "workspace:*",
